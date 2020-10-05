@@ -58,4 +58,16 @@ server.put('/:id', (req,res) => {
     })
 });
 
+server.delete('/:id', (req,res) => {
+    db('accounts')
+    .where('id', req.params.id)
+    .del()
+    .then(acc => {
+        res.status(202).json(acc);
+    })
+    .catch(err => {
+        res.status(500).json(err);
+    })
+});
+
 module.exports = server;
